@@ -13,9 +13,6 @@ namespace GestionReservationSalles
         public FrmLogin()
         {
             InitializeComponent();
-
-            tbxEmail.Text = "admin@exemple.com";
-            tbxPassword.Text = "admin123";
         }
 
         private void tbxEmail_TextChanged(object sender, EventArgs e)
@@ -50,8 +47,10 @@ namespace GestionReservationSalles
             {
                 MessageBox.Show($"Login successful!");
                 FrmAccueil frmAccueil = FrmAccueil.Instance;
-                frmAccueil.Show();
-                this.Hide();
+                // clear login fields on successful login
+                tbxPassword.Clear();
+                tbxEmail.Clear();
+                UIHelper.ShowAndHide(this, frmAccueil);
             }
 
             else
@@ -61,8 +60,7 @@ namespace GestionReservationSalles
         private void btnInscription_Click(object sender, EventArgs e)
         {
             FrmInscription frmInscription = FrmInscription.Instance;
-            frmInscription.Show();
-            this.Hide();
+            UIHelper.ShowAndHide(this, frmInscription);
         }
 
         private void FrmLogin_Closed(object sender, EventArgs e)

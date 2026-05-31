@@ -64,25 +64,25 @@
 
             MessageBox.Show("Registration successful!");
 
+            // Clear input fields after successful registration
             tbxName.Clear();
             tbxEmail.Clear();
             tbxPassword.Clear();
 
             FrmLogin frmLogin = FrmLogin.Instance;
-            frmLogin.Show();
-            this.Hide();
+            UIHelper.ShowAndHide(this, frmLogin);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             FrmLogin frmLogin = FrmLogin.Instance;
-            frmLogin.Show();
-            this.Hide();
+            UIHelper.ShowAndHide(this, frmLogin);
         }
 
         private void FrmInscription_Closed(object sender, EventArgs e)
         {
-            Application.Exit();
+            FrmLogin frmLogin = FrmLogin.Instance;
+            UIHelper.ShowAndHide(this, frmLogin);
         }
     }
 }
