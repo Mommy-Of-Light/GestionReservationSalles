@@ -62,7 +62,7 @@ namespace GestionReservationSalles
 
                     // Drop the database at start (useful for development). This is a single line —
                     // comment it out if you want to keep the database between runs.
-                    new MySqlCommand("DROP DATABASE IF EXISTS gestion_salles;", conn).ExecuteNonQuery();
+                    //new MySqlCommand("DROP DATABASE IF EXISTS gestion_salles;", conn).ExecuteNonQuery();
 
                     // Create database if it does not exist
                     using (MySqlCommand cmd = new MySqlCommand("CREATE DATABASE IF NOT EXISTS gestion_salles CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;", conn))
