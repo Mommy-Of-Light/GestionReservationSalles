@@ -173,36 +173,13 @@ Les scripts SQL permettent de :
 * définir les clés étrangères,
 * ajouter des données de test.
 
-## Exemple de script SQL
+## Script sql de création des tables
 
-```sql
-CREATE TABLE Users (
-    idUser INT PRIMARY KEY IDENTITY,
-    name VARCHAR(100),
-    email VARCHAR(100),
-    password VARCHAR(100),
-    role VARCHAR(50)
-);
+File: [gestion_salles](./DB/gestion_salles.sql)
 
-CREATE TABLE Rooms (
-    idRoom INT PRIMARY KEY IDENTITY,
-    name VARCHAR(100),
-    capacity INT,
-    building VARCHAR(100),
-    floor INT
-);
-
-CREATE TABLE Reservations (
-    idUsers INT,
-    idRoom INT,
-    date DATE,
-    hours TIME,
-    className VARCHAR(100),
-
-    FOREIGN KEY (idUsers) REFERENCES Users(idUser),
-    FOREIGN KEY (idRoom) REFERENCES Rooms(idRoom)
-);
-```
+**Pour l'application, il est pas nécessaire de créer un script sql de création de la base de données car le programme gère cela automatiquement.**
+**Il est toutefois requis de modifier les données de connexion dans le code C# pour qu'elles correspondent à votre configuration de base de données.**
+**Elles sont présentes dans le fichier `DbConfig.cs` et dans le fichier `UserManager.cs`, a la ligne 65, il y ala ligne necessaire pour réaliser la base de données a commenter ou decommenter.**
 
 ---
 
