@@ -60,7 +60,7 @@ namespace GestionReservationSalles
             listRooms.Location = new Point(330, 11);
             listRooms.Name = "listRooms";
             listRooms.Size = new Size(440, 199);
-            listRooms.TabIndex = 3;
+            listRooms.TabIndex = 4;
             listRooms.DoubleClick += listRooms_DoubleClick;
             // 
             // txtRoomName
@@ -69,7 +69,7 @@ namespace GestionReservationSalles
             txtRoomName.Name = "txtRoomName";
             txtRoomName.PlaceholderText = "Name";
             txtRoomName.Size = new Size(100, 23);
-            txtRoomName.TabIndex = 4;
+            txtRoomName.TabIndex = 5;
             // 
             // txtCapacity
             // 
@@ -77,7 +77,7 @@ namespace GestionReservationSalles
             txtCapacity.Name = "txtCapacity";
             txtCapacity.PlaceholderText = "Capacity";
             txtCapacity.Size = new Size(50, 23);
-            txtCapacity.TabIndex = 5;
+            txtCapacity.TabIndex = 6;
             // 
             // txtBuilding
             // 
@@ -85,7 +85,7 @@ namespace GestionReservationSalles
             txtBuilding.Name = "txtBuilding";
             txtBuilding.PlaceholderText = "Building";
             txtBuilding.Size = new Size(60, 23);
-            txtBuilding.TabIndex = 6;
+            txtBuilding.TabIndex = 7;
             // 
             // txtFloor
             // 
@@ -93,14 +93,14 @@ namespace GestionReservationSalles
             txtFloor.Name = "txtFloor";
             txtFloor.PlaceholderText = "Floor";
             txtFloor.Size = new Size(50, 23);
-            txtFloor.TabIndex = 7;
+            txtFloor.TabIndex = 8;
             // 
             // btnAddRoom
             // 
             btnAddRoom.Location = new Point(614, 217);
             btnAddRoom.Name = "btnAddRoom";
             btnAddRoom.Size = new Size(75, 23);
-            btnAddRoom.TabIndex = 8;
+            btnAddRoom.TabIndex = 9;
             btnAddRoom.Text = "Add Room";
             btnAddRoom.UseVisualStyleBackColor = true;
             btnAddRoom.Click += btnAddRoom_Click;
@@ -110,7 +110,7 @@ namespace GestionReservationSalles
             btnDeleteUser.Location = new Point(220, 217);
             btnDeleteUser.Name = "btnDeleteUser";
             btnDeleteUser.Size = new Size(92, 23);
-            btnDeleteUser.TabIndex = 9;
+            btnDeleteUser.TabIndex = 3;
             btnDeleteUser.Text = "Delete User";
             btnDeleteUser.UseVisualStyleBackColor = true;
             btnDeleteUser.Click += btnDeleteUser_Click;

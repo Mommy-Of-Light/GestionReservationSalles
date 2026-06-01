@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prometheus;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,22 +37,49 @@ namespace GestionReservationSalles
 
         private void FrmAccueil_Shown(object sender, EventArgs e)
         {
+            FrmAccueilAfterLogin();
+        }
+
+        private void FrmAccueilAfterLogin()
+        {
             // show admin button only for admin users
             btnAdmin.Visible = userManager.CurrentUser?.Role == "admin";
             // refresh reservations when the form is shown
-            LoadMyReservations();
+            if (userManager.CurrentUser != null)
+            {
+                if (userManager.CurrentUser.Role == "user")
+                {
+                    btnReservations.Text = "See Reservations";
+                }
+                else
+                {
+                    btnReservations.Text = "Manage Reservations";
+                }
+                LoadMyReservations();
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void FrmAccueil_Activated(object sender, EventArgs e)
+        {
+            FrmAccueilAfterLogin();
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            AppMetrics.ActiveUsers.Dec();
+
+            userManager.Logout();
+
             FrmLogin frmLogin = FrmLogin.Instance;
             UIHelper.ShowAndHide(this, frmLogin);
         }
 
         private void FrmAccueil_Closed(object sender, EventArgs e)
         {
-            // Just logout. Do not show the login form here — UIHelper will restore the previous form
-            // when this form is closed. Creating or showing the login here caused duplicate windows.
             userManager.Logout();
         }
 
@@ -76,12 +104,21 @@ namespace GestionReservationSalles
 
         private void LoadMyReservations()
         {
-            listBoxMyReservations.Items.Clear();
-            if (userManager.CurrentUser == null) return;
-            var list = reservationManager.GetReservationsForUser(userManager.CurrentUser.IdUser);
-            foreach (var r in list)
+            using (AppMetrics.ReservationLoadTime.NewTimer())
             {
-                listBoxMyReservations.Items.Add(r);
+                listBoxMyReservations.Items.Clear();
+
+                if (userManager.CurrentUser == null)
+                    return;
+
+                var list =
+                    reservationManager.GetReservationsForUser(
+                        userManager.CurrentUser.IdUser);
+
+                foreach (var r in list)
+                {
+                    listBoxMyReservations.Items.Add(r);
+                }
             }
         }
 
@@ -100,6 +137,8 @@ namespace GestionReservationSalles
                 {
                     if (reservationManager.DeleteReservation(r))
                     {
+                        AppMetrics.ReservationCancelled.Inc();
+
                         MessageBox.Show("Reservation cancelled");
                         LoadMyReservations();
                     }

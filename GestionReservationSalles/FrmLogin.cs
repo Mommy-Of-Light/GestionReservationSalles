@@ -45,16 +45,25 @@ namespace GestionReservationSalles
 
             if (connected)
             {
-                MessageBox.Show($"Login successful!");
+                AppMetrics.SuccessfulLogins.Inc();
+                AppMetrics.ActiveUsers.Inc();
+
+                MessageBox.Show("Login successful!");
+
                 FrmAccueil frmAccueil = FrmAccueil.Instance;
-                // clear login fields on successful login
+
                 tbxPassword.Clear();
                 tbxEmail.Clear();
+
                 UIHelper.ShowAndHide(this, frmAccueil);
             }
-
             else
-                MessageBox.Show($"Login failed! Please check your email and password.");
+            {
+                AppMetrics.FailedLogins.Inc();
+
+                MessageBox.Show(
+                    "Login failed! Please check your email and password.");
+            }
         }
 
         private void btnInscription_Click(object sender, EventArgs e)

@@ -62,7 +62,7 @@ namespace GestionReservationSalles
 
                     // Drop the database at start (useful for development). This is a single line —
                     // comment it out if you want to keep the database between runs.
-                    //new MySqlCommand("DROP DATABASE IF EXISTS gestion_salles;", conn).ExecuteNonQuery();
+                    new MySqlCommand("DROP DATABASE IF EXISTS gestion_salles;", conn).ExecuteNonQuery();
 
                     // Create database if it does not exist
                     using (MySqlCommand cmd = new MySqlCommand("CREATE DATABASE IF NOT EXISTS gestion_salles CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;", conn))
@@ -94,14 +94,20 @@ namespace GestionReservationSalles
                         long count = Convert.ToInt64(cmd.ExecuteScalar());
                         if (count == 0)
                         {
-                            using (MySqlCommand insert = new MySqlCommand("INSERT INTO gestion_salles.Users (Name, Email, Password, Role) VALUES (@n1, @e1, @p1, 'admin'), (@n2, @e2, @p2, 'user');", conn))
+                            using (MySqlCommand insert = new MySqlCommand("INSERT INTO gestion_salles.Users (Name, Email, Password, Role) VALUES (@n1, @e1, @p1, @r1), (@n2, @e2, @p2, @r2), (@n3, @e3, @p3, @r3);", conn))
                             {
                                 insert.Parameters.AddWithValue("@n1", "Admin");
                                 insert.Parameters.AddWithValue("@e1", "admin@exemple.com");
                                 insert.Parameters.AddWithValue("@p1", "admin123");
-                                insert.Parameters.AddWithValue("@n2", "User");
-                                insert.Parameters.AddWithValue("@e2", "user@exemple.com");
-                                insert.Parameters.AddWithValue("@p2", "user123");
+                                insert.Parameters.AddWithValue("@r1", "admin");
+                                insert.Parameters.AddWithValue("@n2", "Teacher");
+                                insert.Parameters.AddWithValue("@e2", "teacher@exemple.com");
+                                insert.Parameters.AddWithValue("@p2", "teacher1");
+                                insert.Parameters.AddWithValue("@r2", "teacher");
+                                insert.Parameters.AddWithValue("@n3", "User");
+                                insert.Parameters.AddWithValue("@e3", "user@exemple.com");
+                                insert.Parameters.AddWithValue("@p3", "user1234");
+                                insert.Parameters.AddWithValue("@r3", "user");
                                 insert.ExecuteNonQuery();
                             }
                         }

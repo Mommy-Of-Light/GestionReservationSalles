@@ -9,6 +9,7 @@ namespace GestionReservationSalles
         public static FrmReservation Instance { get; private set; } = new FrmReservation();
 
         private RoomManager roomManager = new RoomManager();
+        private UserManager userManager = UserManager.Instance;
         private ReservationManager reservationManager = new ReservationManager();
 
         public FrmReservation()
@@ -36,6 +37,29 @@ namespace GestionReservationSalles
             comboRooms.DisplayMember = "Name";
             comboRooms.ValueMember = "IdRoom";
             comboRooms.DataSource = rooms;
+
+            if (userManager.CurrentUser.Role == "user")
+            {
+                comboRooms.Enabled = false;
+                datePicker.Enabled = false;
+                txtHours.Enabled = false;
+                txtClass.Enabled = false;
+                btnAdd.Enabled = false;
+
+                listBoxReservations.Location = new System.Drawing.Point(12, 12);
+                listBoxReservations.Size = new System.Drawing.Size(560, 184);
+            }
+            else
+            {
+                comboRooms.Enabled = true;
+                datePicker.Enabled = true;
+                txtHours.Enabled = true;
+                txtClass.Enabled = true;
+                btnAdd.Enabled = true;
+
+                listBoxReservations.Location = new System.Drawing.Point(12, 157);
+                listBoxReservations.Size = new System.Drawing.Size(560, 184);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -70,6 +94,7 @@ namespace GestionReservationSalles
 
             if (reservationManager.AddReservation(r))
             {
+                AppMetrics.ReservationCreated.Inc();
                 // clear the inputs on success
                 txtHours.Clear();
                 txtClass.Clear();

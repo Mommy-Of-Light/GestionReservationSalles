@@ -39,7 +39,7 @@
             btnLogOut.Location = new Point(494, 12);
             btnLogOut.Name = "btnLogOut";
             btnLogOut.Size = new Size(75, 23);
-            btnLogOut.TabIndex = 0;
+            btnLogOut.TabIndex = 3;
             btnLogOut.Text = "Log Out";
             btnLogOut.UseVisualStyleBackColor = true;
             btnLogOut.Click += btnLogOut_Click;
@@ -49,7 +49,7 @@
             btnReservations.Location = new Point(12, 12);
             btnReservations.Name = "btnReservations";
             btnReservations.Size = new Size(150, 23);
-            btnReservations.TabIndex = 1;
+            btnReservations.TabIndex = 0;
             btnReservations.Text = "Manage Reservations";
             btnReservations.UseVisualStyleBackColor = true;
             btnReservations.Click += btnReservations_Click;
@@ -59,7 +59,7 @@
             btnAdmin.Location = new Point(168, 12);
             btnAdmin.Name = "btnAdmin";
             btnAdmin.Size = new Size(150, 23);
-            btnAdmin.TabIndex = 2;
+            btnAdmin.TabIndex = 1;
             btnAdmin.Text = "Admin";
             btnAdmin.UseVisualStyleBackColor = true;
             btnAdmin.Visible = false;
@@ -86,6 +86,7 @@
             Name = "FrmAccueil";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmAccueil";
+            Activated += FrmAccueil_Activated;
             Closed += FrmAccueil_Closed;
             Shown += FrmAccueil_Shown;
             ResumeLayout(false);
